@@ -10,7 +10,7 @@ namespace FlashCardGame
 {
     public partial class Form1 : Form
     {
-        string[] operators = { "+", "-", "x", "÷" };
+        private string[] operators = { "+", "-", "x", "÷" };
         private int correctCount = 0;
         private int incorrectCount = 0;
         private int currentScore = 0;
