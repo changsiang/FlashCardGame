@@ -47,11 +47,11 @@ namespace FlashCardGame
             lblCurrentScore.Text = currentScore.ToString();
             lblOutcome.Text = "";
             history = new List<Tuple<string, string>>();
-            ops = OperatorFactory.GetOperator(cboOps.SelectedItem.ToString());  
+            ops = OperatorFactory.GetOperator(cboOps.SelectedItem.ToString());
             SetQuiz();
             timer1.Start();
         }
-            private void SetQuiz()
+        private void SetQuiz()
         {
             Tuple<int, int> quiz = Tuple.Create(0, 0);
             try
@@ -63,7 +63,7 @@ namespace FlashCardGame
                 GameOver(e.Message);
                 topScore = currentScore > topScore ? currentScore : topScore;
             }
-            catch(InvalidOperationException e)
+            catch (InvalidOperationException e)
             {
                 MessageBox.Show(this, e.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -92,15 +92,15 @@ namespace FlashCardGame
             currentScore = correctCount - incorrectCount;
             lblCorrect.Text = correctCount.ToString();
             lblIncorrect.Text = incorrectCount.ToString();
-            lblCurrentScore.Text = currentScore.ToString();            
+            lblCurrentScore.Text = currentScore.ToString();
             lblTopScore.Text = topScore.ToString();
-            AddQuizHistory(digitOne, digitTwo, answer,cboOps.SelectedItem.ToString());
+            AddQuizHistory(digitOne, digitTwo, answer, cboOps.SelectedItem.ToString());
             txtAnswer.Clear();
             SetQuiz();
         }
         private void AddQuizHistory(int digitOne, int digitTwo, double answer, string ops)
         {
-            string quiz = digitOne.ToString() + " " + ops + " " + digitTwo.ToString() + " = " + answer.ToString();             
+            string quiz = digitOne.ToString() + " " + ops + " " + digitTwo.ToString() + " = " + answer.ToString();
             string outcome = lblOutcome.Text == "Correct Answer!" ? "Correct" : "Incorrect";
             history.Add(Tuple.Create(quiz, outcome));
             UpdateDataGrid();
@@ -122,12 +122,12 @@ namespace FlashCardGame
             Settings.Default.lastTopScore = topScore;
 
             double totalAnswered = Convert.ToDouble(correctCount + incorrectCount);
-            int timeTaken = timeLimit - timeTicker;            
+            int timeTaken = timeLimit - timeTicker;
             double responseTime = Math.Round((timeTaken / totalAnswered) * 1000, 0);
             string message =
                 "Game Over!\nScore: " + currentScore.ToString() +
-                "\nTotal Answered: " + totalAnswered.ToString() + 
-                "\nTime Taken: " + timeTaken.ToString() + "s" + 
+                "\nTotal Answered: " + totalAnswered.ToString() +
+                "\nTime Taken: " + timeTaken.ToString() + "s" +
                 "\nReaction Time: " + responseTime + "ms";
             DialogResult dr = MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (dr == DialogResult.OK)
@@ -138,11 +138,11 @@ namespace FlashCardGame
         private void Timer1_Tick(object sender, EventArgs e)
         {
             timeTicker--;
-            if(timeTicker < 20 && timeTicker > 0)
+            if (timeTicker < 20 && timeTicker > 0)
             {
                 label2.ForeColor = Color.Red;
             }
-            else if(timeTicker == 0)
+            else if (timeTicker == 0)
             {
                 timer1.Stop();
                 GameOver("Game Over!");
@@ -163,7 +163,7 @@ namespace FlashCardGame
             {
                 lastTopScore = Settings.Default.lastTopScore;
             }
-            catch(SettingsPropertyNotFoundException)
+            catch (SettingsPropertyNotFoundException)
             {
                 lastTopScore = -169;
                 return lastTopScore;
