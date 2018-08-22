@@ -14,11 +14,11 @@ namespace FlashCardGame
         private int correctCount = 0;
         private int incorrectCount = 0;
         private int currentScore = 0;
-        static int topScore = -169;
+        private static int topScore = -169;
         private int timeTicker; //in seconds    
         private int timeLimit = 60; //in seconds
         private List<Tuple<string, string>> history;
-        Operator ops;
+        private Operator ops;
 
         public Form1()
         {
